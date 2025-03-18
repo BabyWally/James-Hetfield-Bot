@@ -130,6 +130,10 @@ async def on_message(message):
         await bot.process_commands(message)
         return
 
+    # Debugging log
+    if stop_replies:
+        print(f"Replies are stopped. Message from {message.author}: {message.content}")
+    
     # If stop_replies is True, don't react or reply
     if stop_replies:
         return
@@ -170,6 +174,45 @@ async def on_message(message):
     # Allow other bot commands to process
     await bot.process_commands(message)
 
+    # Allow other bot commands to process
+    await bot.process_commands(message)
+
+# auto reply for sophs channel
+
+@bot.event
+async def on_message(message):
+    """Handles message responses and reactions."""
+    global stop_replies
+
+    # Prevent bot from reacting to itself
+    if message.author == bot.user:
+        return
+
+    # Allow commands to work even if replies are stopped
+    if message.content.startswith('!'):
+        await bot.process_commands(message)
+        return
+
+    # Debugging log
+    if stop_replies:
+        print(f"Replies are stopped. Message from {message.author}: {message.content}")
+    
+    # If stop_replies is True, don't react or reply
+    if stop_replies:
+        return
+
+    # Define your target channel and user ID
+    target_channel_id = 1346969745102209095  # Replace with the channel ID you want to listen to
+    target_user_id = 1076322897389441054  # Replace with the user ID that should trigger the response
+
+    # Check if the message is in the target channel and from the target user
+    if message.channel.id == target_channel_id and message.author.id == target_user_id:
+        await message.channel.send("man shut the fuck up already DAMN.")
+    
+    # Allow other bot commands to process
+    await bot.process_commands(message)
+
+
 # Define the allowed user ID (Replace with actual Discord ID)
 ALLOWED_USER_ID = 470801649221500938  # Change this to the ID of the user who can use restricted commands
 
@@ -177,7 +220,7 @@ ALLOWED_USER_ID = 470801649221500938  # Change this to the ID of the user who ca
 def is_allowed_user():
     async def predicate(ctx):
         if ctx.author.id != ALLOWED_USER_ID:
-            await ctx.send("❌ You do not have permission to use this command!")
+            await ctx.send("do NOT try to use a command again bihh ahh mf.")
             return False
         return True
     return commands.check(predicate)

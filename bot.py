@@ -264,6 +264,26 @@ async def metallica_explosion(ctx):
 
     await ctx.send(explosion)
 
+OWNER_ID = 470801649221500938  # Your Discord user ID
+
+@bot.event
+async def on_message(message):
+    if message.author.id == OWNER_ID and isinstance(message.channel, discord.DMChannel):
+        if message.content.lower() == "stop":
+            await message.channel.send("Shutting down...")
+            await bot.close()
+        elif message.content.lower() == "status":
+            await message.channel.send("Bot is running.")
+        elif message.content.lower() == "send":
+            channel = bot.get_channel(YOUR_CHANNEL_ID)
+            if channel:
+                await channel.send("Hello from the owner!")
+                await message.channel.send("Message sent.")
+            else:
+                await message.channel.send("Channel not found.")
+    await bot.process_commands(message)  # Allow other commands to work
+
+
 ### === FLASK SERVER === ###
 
 app = Flask('')

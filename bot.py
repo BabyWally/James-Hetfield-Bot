@@ -275,7 +275,7 @@ async def on_message(message):
         elif message.content.lower() == "status":
             await message.channel.send("Bot is running.")
         elif message.content.lower() == "send":
-            channel = bot.get_channel(YOUR_CHANNEL_ID)
+            channel = bot.get_channel(1349240997367910431)
             if channel:
                 await channel.send("Hello from the owner!")
                 await message.channel.send("Message sent.")

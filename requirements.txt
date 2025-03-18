@@ -2,3 +2,12 @@ discord.py
 flask
 requests
 pytz
+PyNaCl
+aiohttp
+pytz
+psycopg2
+SQLAlchemy
+pandas
+matplotlib
+numpy
+apscheduler
